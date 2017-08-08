@@ -32,14 +32,14 @@ public class JeuxDeDonneesTest {
 
 	@Test
 	public void test_employe() {
-		assertThat(bulletin1.getRemunerationEmploye().getMatricule().contains("M01"));
+		assertThat(bulletin1.getRemunerationEmploye().getMatricule()).isEqualTo("M01");
 	}
 
 	@Test
 	public void test_entreprise() {
-		assertThat(bulletin1.getRemunerationEmploye().getEntreprise().getSiret().contains("80966785000022"));
-		assertThat(bulletin1.getRemunerationEmploye().getEntreprise().getDenomination().contains("Dev Entreprise"));
-		assertThat(bulletin1.getRemunerationEmploye().getEntreprise().getCodeNaf().contains("6202A"));
+		assertThat(bulletin1.getRemunerationEmploye().getEntreprise().getSiret()).isEqualTo("80966785000022");
+		assertThat(bulletin1.getRemunerationEmploye().getEntreprise().getDenomination()).isEqualTo("Dev Entreprise");
+		assertThat(bulletin1.getRemunerationEmploye().getEntreprise().getCodeNaf()).isEqualTo("6202A");
 	}
 
 	@Test
