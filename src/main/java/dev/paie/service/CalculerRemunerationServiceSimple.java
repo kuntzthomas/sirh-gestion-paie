@@ -23,8 +23,8 @@ public class CalculerRemunerationServiceSimple implements CalculerRemunerationSe
 		resultat.setSalaireDeBase(paieUtils.formaterBigDecimal(bulletin.getRemunerationEmploye().getGrade()
 				.getNbHeuresBase().multiply(bulletin.getRemunerationEmploye().getGrade().getTauxBase())));
 
-		resultat.setSalaireBrut(
-				(new BigDecimal(resultat.getSalaireDeBase()).add(bulletin.getPrimeExceptionnelle())).toString());
+		resultat.setSalaireBrut(paieUtils.formaterBigDecimal(
+				(new BigDecimal(resultat.getSalaireDeBase()).add(bulletin.getPrimeExceptionnelle()))));
 
 		resultat.setTotalRetenueSalarial(paieUtils.formaterBigDecimal(
 				bulletin.getRemunerationEmploye().getProfilRemuneration().getCotisationsNonImposables().stream()
