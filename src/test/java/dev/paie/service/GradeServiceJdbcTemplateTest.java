@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.math.BigDecimal;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +12,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import dev.paie.config.ServicesConfig;
 import dev.paie.entite.Grade;
-import dev.paie.spring.DataSourceMySQLConfig;
 
 //Sélection des classes de configuration Spring à utiliser lors du test
-@ContextConfiguration(classes = { ServicesConfig.class, DataSourceMySQLConfig.class })
+@ContextConfiguration(classes = { ServicesConfig.class })
 
 // Configuration JUnit pour que Spring prenne la main sur le cycle de vie du
 // test
@@ -25,12 +23,6 @@ public class GradeServiceJdbcTemplateTest {
 
 	@Autowired
 	private GradeService gradeService;
-
-	@Before
-	public void setUp() {
-		gradeService.truncateTableGrade();
-
-	}
 
 	@Test
 	public void test_sauvegarder_lister_mettre_a_jour() {

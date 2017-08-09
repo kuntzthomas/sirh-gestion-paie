@@ -1,11 +1,29 @@
 package dev.paie.entite;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Avantage {
 
+	@Id
+	@GeneratedValue
 	private Integer id;
 	private String code;
 	private String nom;
 	private Integer montant;
+
+	public Avantage() {
+		super();
+	}
+
+	public Avantage(String code, String nom, Integer montant) {
+		super();
+		this.code = code;
+		this.nom = nom;
+		this.montant = montant;
+	}
 
 	public String getCode() {
 		return code;
