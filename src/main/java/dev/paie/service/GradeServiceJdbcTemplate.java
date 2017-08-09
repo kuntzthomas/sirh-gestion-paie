@@ -7,13 +7,8 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.test.context.ContextConfiguration;
 
-import dev.paie.config.ServicesConfig;
 import dev.paie.entite.Grade;
-import dev.paie.spring.DataSourceMySQLConfig;
-
-@ContextConfiguration(classes = { ServicesConfig.class, DataSourceMySQLConfig.class })
 
 @Repository
 public class GradeServiceJdbcTemplate implements GradeService {
