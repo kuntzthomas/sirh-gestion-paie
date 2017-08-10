@@ -85,12 +85,12 @@
 			<properties>
 				<db.driver>com.mysql.jdbc.Driver</db.driver>
 				<db.url>jdbc:mysql://localhost:3306/sirh-paie?useSSL=false</db.url>
-				<db.user>user</db.user>
-				<db.pwd>user</db.pwd>
+				<db.user>root</db.user>
+				<db.pwd></db.pwd>
 			</properties>
 		</profile>
 	</profiles>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -104,6 +104,24 @@
 	</dependencyManagement>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -126,10 +144,11 @@
 			<version>1.0.0.Final</version>
 		</dependency>
 		<!-- Implémentation JPA -->
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>5.1.0.Final</version>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.10.Final</version>
 			<scope>runtime</scope>
 		</dependency>
 

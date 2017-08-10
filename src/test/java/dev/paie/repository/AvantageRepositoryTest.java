@@ -14,6 +14,7 @@ import dev.paie.entite.Avantage;
 @ContextConfiguration(classes = { ServicesConfig.class })
 @RunWith(SpringRunner.class)
 public class AvantageRepositoryTest {
+
 	@Autowired
 	private AvantageRepository avantageRepository;
 

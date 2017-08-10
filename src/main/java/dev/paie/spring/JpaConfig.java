@@ -30,7 +30,7 @@ public class JpaConfig {
 	// définissant un bean DataSource.
 	public EntityManagerFactory entityManagerFactory(DataSource dataSource) {
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		vendorAdapter.setGenerateDdl(true);
+		// vendorAdapter.setGenerateDdl(true);
 		// activer les logs SQL
 		vendorAdapter.setShowSql(true);
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
