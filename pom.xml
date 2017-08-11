@@ -25,6 +25,12 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 	</build>
 
 	<profiles>
@@ -33,23 +39,11 @@
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<configuration>
-							<debug>true</debug>
-							<optimize>false</optimize>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
 			<properties>
-				<db.driver>org.h2.Driver</db.driver>
-				<db.url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1</db.url>
-				<db.user>sa</db.user>
-				<db.pwd></db.pwd>
+				<maven.driver>org.h2.Driver</maven.driver>
+				<maven.url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1</maven.url>
+				<maven.user>sa</maven.user>
+				<maven.pwd></maven.pwd>
 			</properties>
 			<dependencies>
 				<dependency>
@@ -60,20 +54,12 @@
 				</dependency>
 			</dependencies>
 		</profile>
+
 		<profile>
 			<id>prod</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<configuration>
-							<debug>false</debug>
-							<optimize>true</optimize>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
 			<dependencies>
 				<dependency>
 					<groupId>mysql</groupId>
@@ -83,10 +69,10 @@
 				</dependency>
 			</dependencies>
 			<properties>
-				<db.driver>com.mysql.jdbc.Driver</db.driver>
-				<db.url>jdbc:mysql://localhost:3306/sirh-paie?useSSL=false</db.url>
-				<db.user>root</db.user>
-				<db.pwd></db.pwd>
+				<maven.driver>com.mysql.jdbc.Driver</maven.driver>
+				<maven.url>jdbc:mysql://localhost:3306/sirh-paie?useSSL=false</maven.url>
+				<maven.user>root</maven.user>
+				<maven.pwd></maven.pwd>
 			</properties>
 		</profile>
 	</profiles>
@@ -104,6 +90,23 @@
 	</dependencyManagement>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>4.2.2.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>4.2.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>4.2.2.RELEASE</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>

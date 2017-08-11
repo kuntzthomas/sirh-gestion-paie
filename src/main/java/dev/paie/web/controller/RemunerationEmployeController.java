@@ -1,21 +1,18 @@
 package dev.paie.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import dev.paie.entite.Entreprise;
-import dev.paie.entite.Grade;
-import dev.paie.entite.ProfilRemuneration;
-import dev.paie.entite.RemunerationEmploye;
-import dev.paie.repository.EntrepriseRepository;
-import dev.paie.repository.GradeRepository;
-import dev.paie.repository.ProfilRemunerationRepository;
-import dev.paie.repository.RemunerationEmployeRepository;
 import dev.paie.service.RemunerationService;
 
 @Controller
@@ -23,57 +20,54 @@ import dev.paie.service.RemunerationService;
 public class RemunerationEmployeController {
 
 	@Autowired
-	private GradeRepository repoGrade;
-	@Autowired
-	private EntrepriseRepository repoEntreprise;
-	@Autowired
-	private ProfilRemunerationRepository repoProfilRemun;
-	@Autowired
-	private RemunerationEmployeRepository repoRemunerationEmploye;
-	@Autowired
 	private RemunerationService remunerationService;
 
 	@RequestMapping(method = RequestMethod.GET, path = "/creer")
+	@Secured("ROLE_ADMINISTRATEUR")
 	public ModelAndView creerEmploye() {
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("employes/creerEmploye");
-		mv.addObject("listEntreprises", repoEntreprise.findAll());
-		mv.addObject("listProfils", repoProfilRemun.findAll());
-		mv.addObject("listGrades", repoGrade.findAll());
+		mv.addObject("listEntreprises", remunerationService.findAllEntreprise());
+		mv.addObject("listProfils", remunerationService.findAllProfilRemun());
+		mv.addObject("listGrades", remunerationService.findAllGrade());
 
 		return mv;
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/creer")
-	public ModelAndView creerEmployePost(HttpServletRequest req) {
-
-		ModelAndView mv = new ModelAndView();
+	@Secured("ROLE_ADMINISTRATEUR")
+	public String creerEmployePost(HttpServletRequest req) {
 
 		String matricule = req.getParameter("matricule");
 		String nomEntreprise = req.getParameter("entreprise");
 		String codeProfil = req.getParameter("profil");
 		String codeGrade = req.getParameter("grade");
 
-		Entreprise entreprise = remunerationService.getEntrepriseWithName(nomEntreprise);
-		ProfilRemuneration profil = remunerationService.getProfilWithCode(codeProfil);
-		Grade grade = remunerationService.getGradeWithCode(codeGrade);
-
-		repoRemunerationEmploye.save(new RemunerationEmploye(matricule, entreprise, profil, grade));
-
-		mv.setViewName("employes/creerEmploye");
-
-		return mv;
+		remunerationService.saveNewRemuneration(matricule, nomEntreprise, codeProfil, codeGrade);
+		
+		return "redirect:/mvc/employes/lister";
 
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/lister")
+	@Secured({"ROLE_UTILISATEUR", "ROLE_ADMINISTRATEUR"})
 	public ModelAndView listerEmployes() {
 
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("employes/listerEmployes");
-		mv.addObject("listeRenumEmployes", repoRemunerationEmploye.findAll());
+		mv.setViewName("employes/listerEmploye");
+		mv.addObject("listEmployes", remunerationService.findAllRemuneration());
 
 		return mv;
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "/logout")
+    @Secured({ "ROLE_ADMINISTRATEUR", "ROLE_UTILISATEUR" })
+    protected String logOut(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/mvc/connexion?logout";
+    }
 }

@@ -1,5 +1,8 @@
 package dev.paie.entite;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,9 +21,11 @@ public class RemunerationEmploye {
 	private ProfilRemuneration profilRemuneration;
 	@ManyToOne
 	private Grade grade;
+	private String dateCreation;
 
 	public RemunerationEmploye() {
 		super();
+		this.dateCreation = DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm:ss").format(ZonedDateTime.now());
 	}
 
 	public RemunerationEmploye(String matricule, Entreprise entreprise, ProfilRemuneration profilRemuneration,
@@ -29,6 +34,7 @@ public class RemunerationEmploye {
 		this.entreprise = entreprise;
 		this.profilRemuneration = profilRemuneration;
 		this.grade = grade;
+		this.dateCreation = DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm:ss").format(ZonedDateTime.now());
 	}
 
 	public String getMatricule() {
@@ -69,6 +75,14 @@ public class RemunerationEmploye {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getDateCreation() {
+		return dateCreation;
+	}
+
+	public void setDateCreation(String dateCreation) {
+		this.dateCreation = dateCreation;
 	}
 
 }
