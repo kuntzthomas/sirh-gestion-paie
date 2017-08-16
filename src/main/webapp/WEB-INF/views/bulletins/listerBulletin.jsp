@@ -20,40 +20,40 @@
 
 	<div>
 		<ul class="nav nav-pills">
-			<li><a
-				href="<c:url value='/mvc/employes/lister'></c:url>">Lister les
-					remunerations</a></li>
-			<li><a
-				href="<c:url value='/mvc/employes/creer'></c:url>">Ajouter une
-					remuneration</a></li>
+			<li><a href="<c:url value='/mvc/employes/lister'></c:url>">Lister
+					les remunerations</a></li>
+			<li><a href="<c:url value='/mvc/employes/creer'></c:url>">Ajouter
+					une remuneration</a></li>
 			<li><a href="#">Lister les bulletins</a></li>
 			<li><a href="#">Créer un bulletin</a></li>
 			<li><a href="<c:url value='/mvc/employes/logout'></c:url>">logout</a></li>
 		</ul>
 	</div>
-
-	<h1 align="center">Liste des employés</h1>
-
-	<!--  Liste des employés  -->
-	<table border='2'
-		class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
+	
+	<h1 align="center">Liste des bulletins</h1>
+	
+	<!--  Liste des bulletins  -->
+	<table border='2'>
 		<thead>
 			<tr>
 				<th style="text-align: center;">Date et heure de création</th>
+				<th style="text-align: center;">Periode</th>
 				<th style="text-align: center;">Matricule</th>
-				<th style="text-align: center;">Grade</th>
+				<th style="text-align: center;">Salaire brut</th>
+				<th style="text-align: center;">Net imposable</th>
+				<th style="text-align: center;">Net à payer</th>
+				<th style="text-align: center;">Actions</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="Employe" items="${listEmployes}">
+			<c:forEach var="Bulletin" items="${listBulletin}">
 				<tr>
-					<td style="text-align: center;">${Employe.dateCreation}</td>
-					<td style="text-align: center;">${Employe.matricule}</td>
-					<td style="text-align: center;">${Employe.grade.code}</td>
+					<td style="text-align: center;">${Bulletin.dateCreation}</td>
+					<td style="text-align: center;">${Bulletin.periode}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-	<!--  Fin Liste des employés  -->
+	<!--  Fin Liste des bulletins  -->
 </body>
 </html>

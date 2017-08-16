@@ -18,13 +18,13 @@
 
 	<div>
 		<ul class="nav nav-pills">
-			<li role="presentations"><a
+			<li><a
 				href="<c:url value='/mvc/employes/lister'></c:url>">Lister les remunerations</a></li>
-			<li role="presentations"><a
+			<li><a
 				href="<c:url value='/mvc/employes/creer'></c:url>">Ajouter une remuneration</a></li>
-			<li role="presentations"><a href="#">Lister les bulletins</a></li>
-			<li role="presentations"><a href="#">Créer un bulletin</a></li>
-			<li role="presentations"><a href="<c:url value='/mvc/employes/logout'></c:url>">logout</a></li>
+			<li><a href="#">Lister les bulletins</a></li>
+			<li><a href="#">Créer un bulletin</a></li>
+			<li><a href="<c:url value='/mvc/employes/logout'></c:url>">logout</a></li>
 		</ul>
 	</div>
 
@@ -33,7 +33,6 @@
 
 	<form class="form-horizontal" method="post" action="">
 		<fieldset>
-
 
 			<!-- Matricule -->
 			<div class="form-group">
@@ -56,7 +55,7 @@
 				</div>
 			</div>
 
-			<!-- Select Basic -->
+			<!-- Select Profil -->
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="profil">Profil</label>
 				<div class="col-md-4">
@@ -68,7 +67,7 @@
 				</div>
 			</div>
 
-			<!-- Select Basic -->
+			<!-- Select Grade -->
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="grade">Grade</label>
 				<div class="col-md-4">
@@ -80,7 +79,7 @@
 				</div>
 			</div>
 
-			<!-- Button -->
+			<!-- Button ajout -->
 			<div class="form-group">
 				<div align="right" class="col-md-8">
 					<button id="ajouter" name="ajouter" class="btn btn-primary">Ajouter</button>
