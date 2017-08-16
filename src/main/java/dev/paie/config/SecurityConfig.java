@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.formLogin().loginPage("/mvc/connexion").permitAll()
 		.defaultSuccessUrl("/mvc/employes/lister") //page par defaut après login
 		.and()
-		.logout();
+		.logout().logoutSuccessUrl("/mvc/employes/lister");
 		
 	}
 }
